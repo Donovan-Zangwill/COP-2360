@@ -1,0 +1,48 @@
+using System;
+
+class Program1
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter number you want to divide: ");
+        string input1 = Console.ReadLine();
+
+        Console.Write("Enter the number you want to divide by: ");
+        string input2 = Console.ReadLine();
+
+        Divide(input1, input2);
+    }
+
+    static void Divide(string num1, string num2)
+    {
+        try
+        {
+            // Convert inputs to integers
+            int a = Convert.ToInt32(num1);
+            int b = Convert.ToInt32(num2);
+
+            if (b == 0)
+                throw new DivideByZeroException();
+
+            // Perform division as double for precision
+            double result = (double)a / b;
+            Console.WriteLine($"Result rounded to hundredths: {Math.Round(result, 2)}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Error: One of the inputs is not a valid number.");
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Error: Cannot divide by zero.");
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Error: The number entered is too large or too small.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unexpected error: {ex.Message}");
+        }
+    }
+}
